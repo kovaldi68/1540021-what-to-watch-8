@@ -4,7 +4,15 @@ import MovieCard from '../movie-card.tsx/movie-card';
 import GenresList from '../genres-list/genres-list';
 import ButtonMore from '../button-more/button-more';
 
-function MainPage():JSX.Element {
+type MoviePromoProps = {
+  movieTitle: string,
+  movieGenre: string,
+  movieReleaseDate: string | number;
+}
+
+function MainPage(props: MoviePromoProps):JSX.Element {
+  const {movieTitle, movieGenre, movieReleaseDate} = props;
+
   return (
     <>
       <section className="film-card">
@@ -23,10 +31,10 @@ function MainPage():JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{movieTitle}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{movieGenre}</span>
+                <span className="film-card__year">{movieReleaseDate}</span>
               </p>
 
               <div className="film-card__buttons">
