@@ -1,17 +1,20 @@
-import Header from '../header/header';
-import Footer from '../footer/footer';
-import MovieCard from '../movie-card.tsx/movie-card';
-import GenresList from '../genres-list/genres-list';
-import ButtonMore from '../button-more/button-more';
+import Header from '../../components/header/header';
+import Footer from '../../components/footer/footer';
+import GenresList from '../../components/genres-list/genres-list';
+import ButtonMore from '../../components/button-more/button-more';
+import MovieCard from '../../components/movie-card.tsx/movie-card';
+// import MovieCatalogList from '../../components/movie-catalog-list/movie-catalog-list';
+
 
 type MoviePromoProps = {
   movieTitle: string,
   movieGenre: string,
-  movieReleaseDate: string | number;
+  movieReleaseDate: string | number,
+  moviesCount: number[]
 }
 
-function MainPage(props: MoviePromoProps):JSX.Element {
-  const {movieTitle, movieGenre, movieReleaseDate} = props;
+function Main(props: MoviePromoProps):JSX.Element {
+  const {movieTitle, movieGenre, movieReleaseDate, moviesCount} = props;
 
   return (
     <>
@@ -63,27 +66,12 @@ function MainPage(props: MoviePromoProps):JSX.Element {
           <GenresList />
 
           <div className="catalog__films-list">
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
-            <MovieCard />
+            {
+              moviesCount.map((element) => <MovieCard key={ element }/>)
+            }
           </div>
+
+          {/* <MovieCatalogList moviesCount={ moviesCount }/> */}
 
           <ButtonMore />
         </section>
@@ -94,4 +82,4 @@ function MainPage(props: MoviePromoProps):JSX.Element {
   );
 }
 
-export default MainPage;
+export default Main;

@@ -1,13 +1,19 @@
-import MainPage from '../main-page/main-page';
+import Main from '../../pages/main/main';
 
 type AppMovieProps = {
   movieTitle: string,
   movieGenre: string,
-  movieReleaseDate: string | number;
+  movieReleaseDate: string | number,
+  moviesCount: number[]
 }
 
-function App({movieTitle, movieGenre, movieReleaseDate}: AppMovieProps): JSX.Element {
-  return <MainPage movieTitle={movieTitle} movieGenre={movieGenre} movieReleaseDate={movieReleaseDate} />;
+function App({
+  movieTitle,
+  movieGenre,
+  movieReleaseDate,
+  moviesCount,
+}: AppMovieProps): JSX.Element {
+  return <Main movieTitle={ movieTitle } movieGenre={ movieGenre } movieReleaseDate={ movieReleaseDate } moviesCount={ moviesCount }/>;
 }
 
 export default App;
