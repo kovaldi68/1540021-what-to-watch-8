@@ -1,4 +1,4 @@
-function MovieReview(): JSX.Element {
+function Review(): JSX.Element {
   return (
     <div className="review">
       <blockquote className="review__quote">
@@ -15,4 +15,4 @@ function MovieReview(): JSX.Element {
   );
 }
 
-export default MovieReview;
+export default Review;

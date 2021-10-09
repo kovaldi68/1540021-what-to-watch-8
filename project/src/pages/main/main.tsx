@@ -2,20 +2,22 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import ButtonMore from '../../components/button-more/button-more';
-import MovieCard from '../../components/movie-card.tsx/movie-card';
-// import MovieCatalogList from '../../components/movie-catalog-list/movie-catalog-list';
+import CatalogList from '../../components/catalog-list/catalog-list';
 
 
 type MoviePromoProps = {
-  movieTitle: string,
-  movieGenre: string,
-  movieReleaseDate: string | number,
-  moviesCount: number[]
+  movieTitle: string;
+  movieGenre: string;
+  movieReleaseDate: string | number;
+  moviesList: number[];
 }
 
-function Main(props: MoviePromoProps):JSX.Element {
-  const {movieTitle, movieGenre, movieReleaseDate, moviesCount} = props;
-
+function Main({
+  movieTitle,
+  movieGenre,
+  movieReleaseDate,
+  moviesList,
+}: MoviePromoProps):JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -65,13 +67,7 @@ function Main(props: MoviePromoProps):JSX.Element {
 
           <GenresList />
 
-          <div className="catalog__films-list">
-            {
-              moviesCount.map((element) => <MovieCard key={ element }/>)
-            }
-          </div>
-
-          {/* <MovieCatalogList moviesCount={ moviesCount }/> */}
+          <CatalogList moviesList={ moviesList }/>
 
           <ButtonMore />
         </section>

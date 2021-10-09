@@ -1,19 +1,26 @@
 import Main from '../../pages/main/main';
 
 type AppMovieProps = {
-  movieTitle: string,
-  movieGenre: string,
-  movieReleaseDate: string | number,
-  moviesCount: number[]
+  movieTitle: string;
+  movieGenre: string;
+  movieReleaseDate: string | number;
+  moviesList: number[];
 }
 
 function App({
   movieTitle,
   movieGenre,
   movieReleaseDate,
-  moviesCount,
+  moviesList,
 }: AppMovieProps): JSX.Element {
-  return <Main movieTitle={ movieTitle } movieGenre={ movieGenre } movieReleaseDate={ movieReleaseDate } moviesCount={ moviesCount }/>;
+  return (
+    <Main
+      movieTitle={movieTitle}
+      movieGenre={movieGenre}
+      movieReleaseDate={movieReleaseDate}
+      moviesList={moviesList}
+    />
+  );
 }
 
 export default App;
