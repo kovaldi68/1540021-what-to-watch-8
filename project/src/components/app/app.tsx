@@ -47,13 +47,17 @@ function App({
         <Route exact path={AppRoutes.Movie}>
           <Movie />
         </Route>
-        <Route exact path={AppRoutes.AddReview}>
-          <AddReview />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoutes.AddReview}
+          render={() => <AddReview />}
+          authStatus={AuthStatus.NoAuth}
+        >
+        </PrivateRoute>
         <Route exact path={AppRoutes.Player}>
           <Player />
         </Route>
-        <Route>
+        <Route path='*'>
           <Error404 />
         </Route>
       </Switch>

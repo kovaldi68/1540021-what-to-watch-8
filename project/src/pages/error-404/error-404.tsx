@@ -6,7 +6,7 @@ function Error404(): JSX.Element {
   return (
     <>
       <Header />
-      <section style={ { textAlign: 'center'} }>
+      <section style={{ textAlign: 'center'}}>
         <h1>
           404 Not Found
         </h1>
