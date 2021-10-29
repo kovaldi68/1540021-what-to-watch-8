@@ -1,37 +1,35 @@
 import Main from '../../pages/main/main';
-import { BrowserRouter, Switch, Route} from 'react-router-dom';
-import { AppRoutes, AuthStatus } from '../../const';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {AppRoutes, AuthStatus} from '../../const';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
-import Movie from '../../pages/movie/movie';
+import MoviePage from '../../pages/movie/movie';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import Error404 from '../../pages/error-404/error-404';
 import PrivateRoute from '../private-route/private-rotue';
 
+import {Movie} from '../../types/movie';
 
 type AppMovieProps = {
-  movieTitle: string;
-  movieGenre: string;
-  movieReleaseDate: string | number;
-  moviesList: number[];
+  promoName: string;
+  promoGenre: string;
+  promoReleased: string;
+  promoPoster: string;
+  videoLink: string;
+  movies: Movie[];
 }
 
-function App({
-  movieTitle,
-  movieGenre,
-  movieReleaseDate,
-  moviesList,
-}: AppMovieProps): JSX.Element {
+function App({promoName, promoGenre, promoReleased, promoPoster, videoLink, movies}: AppMovieProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoutes.Main}>
           <Main
-            movieTitle={movieTitle}
-            movieGenre={movieGenre}
-            movieReleaseDate={movieReleaseDate}
-            moviesList={moviesList}
+            promoName={promoName}
+            promoGenre={promoGenre}
+            promoReleased={promoReleased}
+            movies={movies}
           />
         </Route>
         <Route exact path={AppRoutes.SignIn}>
@@ -40,22 +38,22 @@ function App({
         <PrivateRoute
           exact
           path={AppRoutes.MyList}
-          render={() => <MyList />}
-          authStatus={AuthStatus.NoAuth}
+          render={() => <MyList movies={movies} />}
+          authStatus={AuthStatus.Auth}
         >
         </PrivateRoute>
         <Route exact path={AppRoutes.Movie}>
-          <Movie />
+          <MoviePage />
         </Route>
         <PrivateRoute
           exact
           path={AppRoutes.AddReview}
           render={() => <AddReview />}
-          authStatus={AuthStatus.NoAuth}
+          authStatus={AuthStatus.Auth}
         >
         </PrivateRoute>
         <Route exact path={AppRoutes.Player}>
-          <Player />
+          <Player promoPoster={promoPoster} videoLink={videoLink} />
         </Route>
         <Route path='*'>
           <Error404 />
