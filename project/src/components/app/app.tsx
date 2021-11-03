@@ -3,7 +3,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {AppRoutes, AuthStatus} from '../../const';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
-import MoviePage from '../../pages/movie/movie';
+import MoviePage from '../../pages/movie-page/movie-page';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import Error404 from '../../pages/error-404/error-404';
@@ -43,7 +43,7 @@ function App({promoName, promoGenre, promoReleased, promoPoster, videoLink, movi
         >
         </PrivateRoute>
         <Route exact path={AppRoutes.Movie}>
-          <MoviePage />
+          <MoviePage movies={movies}/>
         </Route>
         <PrivateRoute
           exact
