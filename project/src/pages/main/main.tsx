@@ -4,20 +4,21 @@ import GenresList from '../../components/genres-list/genres-list';
 import ButtonMore from '../../components/button-more/button-more';
 import CatalogList from '../../components/catalog-list/catalog-list';
 
+import {Movie} from '../../types/movie';
 
-type MoviePromoProps = {
-  movieTitle: string;
-  movieGenre: string;
-  movieReleaseDate: string | number;
-  moviesList: number[];
+type MainProps = {
+  promoName: string;
+  promoGenre: string;
+  promoReleased: string;
+  movies: Movie[];
 }
 
 function Main({
-  movieTitle,
-  movieGenre,
-  movieReleaseDate,
-  moviesList,
-}: MoviePromoProps):JSX.Element {
+  promoName,
+  promoGenre,
+  promoReleased,
+  movies,
+}: MainProps):JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -36,10 +37,10 @@ function Main({
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{movieTitle}</h2>
+              <h2 className="film-card__title">{promoName}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{movieGenre}</span>
-                <span className="film-card__year">{movieReleaseDate}</span>
+                <span className="film-card__genre">{promoGenre}</span>
+                <span className="film-card__year">{promoReleased}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -67,7 +68,7 @@ function Main({
 
           <GenresList />
 
-          <CatalogList moviesList={ moviesList }/>
+          <CatalogList movies={movies}/>
 
           <ButtonMore />
         </section>

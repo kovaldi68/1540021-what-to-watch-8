@@ -1,13 +1,15 @@
+// import {useState} from "react";
+import {Movie} from '../../types/movie';
 import MovieCard from '../movie-card.tsx/movie-card';
 
 type CatalogListProps = {
-  moviesList: number[];
+  movies: Movie[];
 }
 
-function CatalogList({ moviesList }: CatalogListProps ): JSX.Element {
+function CatalogList({ movies }: CatalogListProps ): JSX.Element {
   return (
     <div className="catalog__films-list">
-      {moviesList.map((element) => <MovieCard key={element}/>)}
+      {movies.map((movie) => <MovieCard movie={movie} key={movie.id}/>)}
     </div>
   );
 }
