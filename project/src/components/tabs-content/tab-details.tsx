@@ -1,4 +1,4 @@
-function MovieDetails(): JSX.Element {
+function TabsDetails(): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -43,4 +43,4 @@ function MovieDetails(): JSX.Element {
   );
 }
 
-export default MovieDetails;
+export default TabsDetails;

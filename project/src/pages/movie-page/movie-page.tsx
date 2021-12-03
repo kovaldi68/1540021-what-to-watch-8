@@ -1,24 +1,26 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import TabsOverview from '../../components/tabs/tabs-overview';
-import MovieCard from '../../components/movie-card.tsx/movie-card';
+import TabsOverview from '../../components/tabs-content/tab-overview';
+import MovieCard from '../../components/movie-card/movie-card';
+import Tabs from '../../components/tabs/tabs';
 import { Movie } from '../../types/movie';
 import { useParams, Redirect } from 'react-router-dom';
+import AddReviewForm from '../../components/add-review-form/add-review-form';
 
 type MoviePageProps = {
   movies: Movie[];
 }
 
+type PageParams = {
+  id: string;
+}
+
 const SIMILAR_COUNT = 4;
 
 function MoviePage({ movies }: MoviePageProps): JSX.Element {
-  const { id } = useParams() as {
-    id: string;
-  };
-
-  const currentMovie = movies.find((movie) => movie.id.toString() === id);
-  const similarMovies = movies.filter((movie) => movie.toString() !== id).slice(0, SIMILAR_COUNT);
-  const movieAlt = `${currentMovie?.name} poster`;
+  const { id } = useParams<PageParams>();
+  const currentMovie = movies.find((movie) => movie.id === Number(id));
+  const similarMovies = movies.filter((movie) => movie.id !== Number(id)).slice(0, SIMILAR_COUNT);
 
   if (!currentMovie) {
     return <Redirect to='/'/>;
@@ -29,7 +31,7 @@ function MoviePage({ movies }: MoviePageProps): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={currentMovie?.backgroundImage} alt={currentMovie?.name} />
+            <img src={currentMovie.backgroundImage} alt={currentMovie.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -38,10 +40,10 @@ function MoviePage({ movies }: MoviePageProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{currentMovie?.name}</h2>
+              <h2 className="film-card__title">{currentMovie.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{currentMovie?.genre}</span>
-                <span className="film-card__year">{currentMovie?.released}</span>
+                <span className="film-card__genre">{currentMovie.genre}</span>
+                <span className="film-card__year">{currentMovie.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -66,23 +68,11 @@ function MoviePage({ movies }: MoviePageProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={currentMovie?.posterImage} alt={movieAlt} width="218" height="327" />
+              <img src={currentMovie.posterImage} alt={`${currentMovie.name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+              <Tabs />
 
               <TabsOverview movie={currentMovie}/>
 
@@ -90,6 +80,8 @@ function MoviePage({ movies }: MoviePageProps): JSX.Element {
           </div>
         </div>
       </section>
+
+      <AddReviewForm />
 
       <div className="page-content">
         <section className="catalog catalog--like-this">

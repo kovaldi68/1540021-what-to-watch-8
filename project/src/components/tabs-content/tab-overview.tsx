@@ -1,7 +1,7 @@
 import { Movie } from '../../types/movie';
 
 type TabsProps = {
-  movie: Movie | undefined;
+  movie: Movie;
 }
 
 const getRating = function(rate: number | undefined) {
@@ -26,27 +26,29 @@ const getRating = function(rate: number | undefined) {
   }
 };
 
-function TabsOverview( { movie }: TabsProps): JSX.Element {
-  const scoresCountString = `${movie?.scoresCount} ratings`;
-  const movieStarring = `Starring: ${movie?.starring.join(', ')} and other`;
-  const movieDirector = `Director: ${movie?.director}`;
+function TabsOverview({ movie }: TabsProps): JSX.Element {
+  const scoresCountString = `${movie.scoresCount} ratings`;
 
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{movie?.rating}</div>
+        <div className="film-rating__score">{movie.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{getRating(movie?.rating)}</span>
+          <span className="film-rating__level">{getRating(movie.rating)}</span>
           <span className="film-rating__count">{scoresCountString}</span>
         </p>
       </div>
 
       <div className="film-card__text">
-        <p>{movie?.description}</p>
+        <p>{movie.description}</p>
 
-        <p className="film-card__director"><strong>{movieDirector}</strong></p>
+        <p className="film-card__director">
+          <strong>Director: {movie.director}</strong>
+        </p>
 
-        <p className="film-card__starring"><strong>{movieStarring}</strong></p>
+        <p className="film-card__starring">
+          <strong>Starring: {movie.starring.join(', ')} and other</strong>
+        </p>
       </div>
     </>
   );

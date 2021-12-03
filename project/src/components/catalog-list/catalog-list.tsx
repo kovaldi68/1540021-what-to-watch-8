@@ -1,6 +1,6 @@
 // import {useState} from "react";
 import {Movie} from '../../types/movie';
-import MovieCard from '../movie-card.tsx/movie-card';
+import MovieCard from '../movie-card/movie-card';
 
 type CatalogListProps = {
   movies: Movie[];
