@@ -2,6 +2,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import TabsOverview from '../../components/tabs-content/tab-overview';
 import MovieCard from '../../components/movie-card/movie-card';
+import { Link } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs';
 import { Movie } from '../../types/movie';
 import { useParams, Redirect } from 'react-router-dom';
@@ -59,7 +60,9 @@ function MoviePage({ movies }: MoviePageProps): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link className="btn film-card__button" to={`/movies/${currentMovie.id}/review`}>
+                  Add review
+                </Link>
               </div>
             </div>
           </div>

@@ -7,7 +7,7 @@ import MoviePage from '../../pages/movie-page/movie-page';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import Error404 from '../../pages/error-404/error-404';
-import PrivateRoute from '../private-route/private-rotue';
+import PrivateRoute from '../private-route/private-route';
 
 import {Movie} from '../../types/movie';
 

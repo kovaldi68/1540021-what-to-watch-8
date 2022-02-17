@@ -1,120 +1,77 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
 
-function AddReviewForm():JSX.Element {
-  const [rating, setRating] = useState(0);
-  const [review, setReviewText] = useState('');
+function AddReviewForm(): JSX.Element {
+  const [reviewState, setReviewState] = useState({
+    rating: '0',
+    review: '',
+  });
+
+  const handleChange = ({target}: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const name = target.name;
+
+
+    // 1 вариант
+    // let ratingValue;
+    // let reviewValue;
+    // name === 'rating' ? ratingValue = target.value : reviewValue = target.value;
+    // setReviewState({
+    //   rating: ratingValue,
+    //   review: reviewValue,
+    // });
+    // не сработает, так как на каждое изменение создавались бы  новые переменные и одна всегда бы записывалась в стейт как undefined.
+    // можно было бы второй присваивать значение из стейта, но тогда это вообще чушь, так как по идее стейт должен обновлять только изменённую часть, а не весь стейт перезаписывать
+    // если там будет гораздо больше значений. да и по TS тоже не проходит.
+
+    // был 2 вариант сделать прямо как в доке Реакта
+    // setReviewState({
+    //   [name]: value
+    // })
+    // но тогда не проходил по TS(типа заявлен тип {key: string, key: string}, а я пытаюсь записать {key: string}), да и ключи пришлось бы называть как name или менять атрибут name у textarea, так как там через дефис написано.
+
+    // 3 вариант
+    //
+  };
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    console.log(reviewState.rating, reviewState.review);
+  };
 
   return (
     <form
-      onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-        evt.preventDefault();
-        console.log(rating, review);
-      }}
+      onSubmit={handleSubmit}
       action="#"
       className="add-review__htmlForm"
     >
       <div className="rating">
         <div className="rating__stars">
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-10" type="radio" name="rating" value="10"
-          />
-          <label className="rating__label" htmlFor="star-10">Rating 10</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-9" type="radio" name="rating" value="9"
-          />
-          <label className="rating__label" htmlFor="star-9">Rating 9</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            defaultChecked
-            className="rating__input" id="star-8" type="radio" name="rating" value="8"
-          />
-          <label className="rating__label" htmlFor="star-8">Rating 8</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-7" type="radio" name="rating" value="7"
-          />
-          <label className="rating__label" htmlFor="star-7">Rating 7</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-6" type="radio" name="rating" value="6"
-          />
-          <label className="rating__label" htmlFor="star-6">Rating 6</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-5" type="radio" name="rating" value="5"
-          />
-          <label className="rating__label" htmlFor="star-5">Rating 5</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-4" type="radio" name="rating" value="4"
-          />
-          <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-3" type="radio" name="rating" value="3"
-          />
-          <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-2" type="radio" name="rating" value="2"
-          />
-          <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-          <input
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const movieRating = Number(target.value);
-              setRating(movieRating);
-            }}
-            className="rating__input" id="star-1" type="radio" name="rating" value="1"
-          />
-          <label className="rating__label" htmlFor="star-1">Rating 1</label>
+          {Array.from({length: 10}, (v, i) => i + 1).reverse().map((item) =>
+            (
+              <>
+                <input
+                  key={item}
+                  className="rating__input"
+                  id={`star-${item}`}
+                  type="radio"
+                  name="rating"
+                  value={Number(reviewState.rating)}
+                  onChange={handleChange}
+                />
+                <label className="rating__label" htmlFor={`start-${item}`}>Rating {item}</label>
+              </>
+            ),
+          )}
         </div>
       </div>
 
       <div className="add-review__text">
         <textarea
-          onChange={({target}: ChangeEvent<HTMLTextAreaElement>) => {
-            const reviewText = target.value;
-            setReviewText(reviewText);
-          }}
-          className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
+          className="add-review__textarea"
+          name="review-text"
+          id="review-text"
+          placeholder="Review text"
+          value={reviewState.review}
+          onChange={handleChange}
         >
         </textarea>
         <div className="add-review__submit">
