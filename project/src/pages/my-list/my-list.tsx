@@ -1,4 +1,4 @@
-import MovieCard from '../../components/movie-card.tsx/movie-card';
+import MovieCard from '../../components/movie-card/movie-card';
 
 import {Movie} from '../../types/movie';
 
