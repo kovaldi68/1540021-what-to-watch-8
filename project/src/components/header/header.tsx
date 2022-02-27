@@ -1,20 +1,14 @@
 import Logo from '../logo/logo';
+import UserNav from '../user-nav/user-nav';
 
-function Header(): JSX.Element {
+function Header({ children }: {children: any} ): JSX.Element {
   return (
     <header className="page-header film-card__head">
       <Logo />
 
-      <ul className="user-block">
-        <li className="user-block__item">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-          </div>
-        </li>
-        <li className="user-block__item">
-          <a className="user-block__link">Sign out</a>
-        </li>
-      </ul>
+      {children}
+
+      <UserNav />
     </header>
   );
 }

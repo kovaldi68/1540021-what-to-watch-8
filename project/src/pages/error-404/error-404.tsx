@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 function Error404(): JSX.Element {
   return (
     <>
-      <Header />
+      <Header>
+        
+      </Header>
       <section style={{ textAlign: 'center'}}>
         <h1>
           404 Not Found

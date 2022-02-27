@@ -7,6 +7,7 @@ import Tabs from '../../components/tabs/tabs';
 import { Movie } from '../../types/movie';
 import { useParams, Redirect } from 'react-router-dom';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
+import MovieCardActions from '../../components/movie-card-actions/movie-card-actions';
 
 type MoviePageProps = {
   movies: Movie[];
@@ -37,7 +38,9 @@ function MoviePage({ movies }: MoviePageProps): JSX.Element {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header />
+          <Header>
+            
+          </Header>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -47,7 +50,13 @@ function MoviePage({ movies }: MoviePageProps): JSX.Element {
                 <span className="film-card__year">{currentMovie.released}</span>
               </p>
 
-              <div className="film-card__buttons">
+              <MovieCardActions>
+                <Link className="btn film-card__button" to={`/movies/${currentMovie.id}/review`}>
+                  Add review
+                </Link>
+              </MovieCardActions>
+
+              {/* <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -63,7 +72,7 @@ function MoviePage({ movies }: MoviePageProps): JSX.Element {
                 <Link className="btn film-card__button" to={`/movies/${currentMovie.id}/review`}>
                   Add review
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

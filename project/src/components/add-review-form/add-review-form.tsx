@@ -1,35 +1,19 @@
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, Fragment } from 'react';
+// import RatingStar from '../rating-star/rating-star';
 
 function AddReviewForm(): JSX.Element {
-  const [reviewState, setReviewState] = useState({
+  const [reviewState, setReviewState] = useState<{[key: string]: string}>({
     rating: '0',
     review: '',
   });
 
   const handleChange = ({target}: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = target.name;
+    const { name, value } = target;
 
-
-    // 1 вариант
-    // let ratingValue;
-    // let reviewValue;
-    // name === 'rating' ? ratingValue = target.value : reviewValue = target.value;
-    // setReviewState({
-    //   rating: ratingValue,
-    //   review: reviewValue,
-    // });
-    // не сработает, так как на каждое изменение создавались бы  новые переменные и одна всегда бы записывалась в стейт как undefined.
-    // можно было бы второй присваивать значение из стейта, но тогда это вообще чушь, так как по идее стейт должен обновлять только изменённую часть, а не весь стейт перезаписывать
-    // если там будет гораздо больше значений. да и по TS тоже не проходит.
-
-    // был 2 вариант сделать прямо как в доке Реакта
-    // setReviewState({
-    //   [name]: value
-    // })
-    // но тогда не проходил по TS(типа заявлен тип {key: string, key: string}, а я пытаюсь записать {key: string}), да и ключи пришлось бы называть как name или менять атрибут name у textarea, так как там через дефис написано.
-
-    // 3 вариант
-    //
+    setReviewState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -47,18 +31,19 @@ function AddReviewForm(): JSX.Element {
         <div className="rating__stars">
           {Array.from({length: 10}, (v, i) => i + 1).reverse().map((item) =>
             (
-              <>
+              // <RatingStar></RatingStar>
+              <Fragment key={item}>
                 <input
-                  key={item}
-                  className="rating__input"
-                  id={`star-${item}`}
-                  type="radio"
-                  name="rating"
-                  value={Number(reviewState.rating)}
-                  onChange={handleChange}
+                    className="rating__input"
+                    id={`star-${item}`}
+                    type="radio"
+                    name="rating"
+                    value={item}
+                    checked = {Number(reviewState.rating) === item}
+                    onChange={handleChange}
                 />
-                <label className="rating__label" htmlFor={`start-${item}`}>Rating {item}</label>
-              </>
+                <label className="rating__label" htmlFor={`star-${item}`}>Rating {item}</label>
+              </Fragment>
             ),
           )}
         </div>
@@ -67,7 +52,7 @@ function AddReviewForm(): JSX.Element {
       <div className="add-review__text">
         <textarea
           className="add-review__textarea"
-          name="review-text"
+          name="review"
           id="review-text"
           placeholder="Review text"
           value={reviewState.review}

@@ -3,6 +3,7 @@ import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import ButtonMore from '../../components/button-more/button-more';
 import CatalogList from '../../components/catalog-list/catalog-list';
+import MovieCardActions from '../../components/movie-card-actions/movie-card-actions';
 
 import {Movie} from '../../types/movie';
 
@@ -28,7 +29,9 @@ function Main({
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header />
+        <Header>
+          
+        </Header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
@@ -43,20 +46,7 @@ function Main({
                 <span className="film-card__year">{promoReleased}</span>
               </p>
 
-              <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-              </div>
+              <MovieCardActions> </MovieCardActions>
             </div>
           </div>
         </div>

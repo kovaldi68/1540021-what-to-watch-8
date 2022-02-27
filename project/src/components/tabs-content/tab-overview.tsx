@@ -27,15 +27,13 @@ const getRating = function(rate: number | undefined) {
 };
 
 function TabsOverview({ movie }: TabsProps): JSX.Element {
-  const scoresCountString = `${movie.scoresCount} ratings`;
-
   return (
     <>
       <div className="film-rating">
         <div className="film-rating__score">{movie.rating}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{getRating(movie.rating)}</span>
-          <span className="film-rating__count">{scoresCountString}</span>
+          <span className="film-rating__count">${movie.scoresCount} ratings</span>
         </p>
       </div>
 
